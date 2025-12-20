@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ProductosMaui.Data;
 using ProductosMaui.Services;
+using ProductosMaui.Views;
 
 namespace ProductosMaui
 {
@@ -27,7 +28,8 @@ namespace ProductosMaui
             options.UseSqlite($"Data source={dbpath}"));
 
             builder.Services.AddTransient<ProductoService>();
-            builder.Services.AddTransient<Views.ProductosPage>();
+            builder.Services.AddTransient<ProductosPage>();
+            builder.Services.AddTransient<DetalleProductoPage>();
 
             var app = builder.Build();
             

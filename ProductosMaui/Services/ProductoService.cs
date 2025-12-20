@@ -38,9 +38,9 @@ namespace ProductosMaui.Services
             return (items, total);
         }
 
-        public Task<Producto?> ObtenerPorId(int id)
+        public Task<Producto?> ObtenerPorSKU(string SKU)
         {
-            return _db.Productos.FirstOrDefaultAsync(x => x.Id == id);
+            return _db.Productos.FirstOrDefaultAsync(x => x.SKU == SKU);
         }
 
         public async Task<(bool Ok, string? Error)> CrearProducto(Producto producto)
@@ -83,7 +83,6 @@ namespace ProductosMaui.Services
             }
 
             actual.Nombre = producto.Nombre.Trim();
-            actual.SKU = producto.SKU.Trim();
             actual.Precio = producto.Precio;
             actual.Stock = producto.Stock;
             actual.Activo = producto.Activo;
@@ -95,7 +94,7 @@ namespace ProductosMaui.Services
             }
             catch (DbUpdateException)
             {
-                return (false, "El SKU ya existe.");
+                return (false, "Error al guardar cambios.");
             }
         }
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ProductosMaui.Views.ProductosPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Productos">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="12">
+
+        <!-- Búsqueda -->
+        <Entry
+            x:Name="txtBuscar"
+            Placeholder="Buscar por Nombre o SKU..."
+            TextChanged="BuscarChanged" />
+
+        <!-- Barra superior -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <Label
+                x:Name="lblInfo"
+                VerticalTextAlignment="Center"
+                Text="Cargando..." />
+
+            <Button
+                Text="+ Nuevo"
+                Clicked="CrearNuevo" />
+        </Grid>
+
+        <!-- Lista -->
+        <CollectionView
+            Grid.Row="2"
+            x:Name="cvProductos"
+            RemainingItemsThreshold="3"
+            RemainingItemsThresholdReached="CargarProductos"
+            SelectionMode="Single"
+            SelectionChanged="ProductoSelected">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="12" RowSpacing="6">
+                        <Label FontSize="16" Text="{Binding Nombre}" />
+                        <Label Grid.Column="1" Text="{Binding SKU}" />
+
+                        <Label Grid.Row="1" Text="{Binding Precio, StringFormat='Precio: ${0:N2} MXN'}" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Stock, StringFormat='Stock: {0}'}" />
+                        
+                        <Button Grid.Row="0" Grid.Column="2"
+                        Text="Editar"
+                        Clicked="EditarProducto" />
+                        
+                        <Button Grid.Row="1" Grid.Column="2"
+                        Text="Borrar"
+                        Clicked="EditarProducto" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
