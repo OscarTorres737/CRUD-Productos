@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using ProductosMaui.Data;
+using ProductosMaui.Services;
 
 namespace ProductosMaui
 {
@@ -18,8 +21,21 @@ namespace ProductosMaui
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            //ruta y nombre de la bd
+            var dbpath = Path.Combine(FileSystem.AppDataDirectory, "productos.db");
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlite($"Data source={dbpath}"));
 
-            return builder.Build();
+            builder.Services.AddTransient<ProductoService>();
+            builder.Services.AddTransient<Views.ProductosPage>();
+
+            var app = builder.Build();
+            
+
+            DbInitializer.CrearDatos(app.Services);
+
+            return app;
+            
         }
     }
 }
