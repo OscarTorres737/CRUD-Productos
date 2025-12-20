@@ -84,7 +84,7 @@ public partial class ProductosPage : ContentPage
                 nameof(DetalleProductoPage),
                 new Dictionary<string, object>
                 {
-                { "ProductoSKU", p.SKU.ToString() }
+                { "ProductoSKU", p.SKU }
                 });
         }
     }

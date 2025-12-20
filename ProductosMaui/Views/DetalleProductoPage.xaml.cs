@@ -4,15 +4,13 @@ using System.Globalization;
 
 namespace ProductosMaui.Views;
 
-[QueryProperty(nameof(Producto), "ProductoSKU")]
+[QueryProperty(nameof(ProductoSKU), "ProductoSKU")]
 public partial class DetalleProductoPage : ContentPage
 {
 	private readonly ProductoService _service;
-
-	private string SKU;
 	private Producto? _producto;
 
-	public string ProductoId { get; set; } = string.Empty;
+    public string ProductoSKU { get; set; }
 
 	public DetalleProductoPage(ProductoService productoService)
 	{
@@ -29,7 +27,16 @@ public partial class DetalleProductoPage : ContentPage
             return;
         }
 
-        _producto = await _service.ObtenerPorSKU(SKU);
+        var sku = (ProductoSKU ?? "").Trim();
+
+        if (string.IsNullOrWhiteSpace(sku))
+        {
+            await DisplayAlert("Error", "SKU inválido.", "OK");
+            await Shell.Current.GoToAsync("..");
+            return;
+        }
+
+        _producto = await _service.ObtenerPorSKU(sku);
 
         if (_producto is null)
         {
@@ -56,16 +63,18 @@ public partial class DetalleProductoPage : ContentPage
         if (_producto is null) return;
 
         var nombre = (txtNombre.Text ?? "").Trim();
-        var sku = _producto.SKU; // NO editable
         var activo = swActivo.IsToggled;
+        decimal precio = decimal.Parse(txtPrecio.Text);
+        int stock = Int32.Parse(txtStock.Text);
 
-        if (!TryParseDecimal(txtPrecio.Text, out var precio))
+
+        if (!TryParseDecimal(txtPrecio.Text, out var presio))
         {
             await DisplayAlert("Validación", "Precio inválido. Ejemplo: 1299.00", "OK");
             return;
         }
 
-        if (!int.TryParse((txtStock.Text ?? "").Trim(), out var stock))
+        if (!int.TryParse((txtStock.Text ?? "").Trim(), out var stok))
         {
             await DisplayAlert("Validación", "Stock inválido. Ejemplo: 20", "OK");
             return;
@@ -74,10 +83,13 @@ public partial class DetalleProductoPage : ContentPage
         //armado de obj
         var actualizado = new Producto
         {
+            Id = _producto.Id,
+            SKU = _producto.SKU,
             Nombre = nombre,
             Precio = precio,
             Stock = stock,
             Activo = activo,
+            FechaAlta = _producto.FechaAlta
         };
 
         var (ok, error) = await _service.ActualizarProducto(actualizado);

@@ -111,7 +111,7 @@ namespace ProductosMaui.Services
             return (true, null);
         }
 
-        private async Task<string?> ValidarProducto(int id, Producto producto)
+        public async Task<string?> ValidarProducto(int id, Producto producto)
         {
             if (string.IsNullOrWhiteSpace(producto.Nombre))
             {
