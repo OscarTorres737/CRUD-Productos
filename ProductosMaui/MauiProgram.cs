@@ -37,10 +37,10 @@ namespace ProductosMaui
             builder.Services.AddTransient<ProductoService>();
             builder.Services.AddTransient<ProductosPage>();
             builder.Services.AddTransient<DetalleProductoPage>();
+            builder.Services.AddTransient<AgregarProducto>();
 
             var app = builder.Build();
             
-
             DbInitializer.CrearDatos(app.Services);
 
             return app;

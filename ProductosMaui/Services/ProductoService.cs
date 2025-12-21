@@ -24,8 +24,9 @@ namespace ProductosMaui.Services
                 
             if (!string.IsNullOrWhiteSpace(query))
             {
-                query = query.Trim();
-                q = q.Where(x => x.Nombre.Contains(query) || x.SKU.Contains(query));
+                var term = query.Trim().ToLower();
+
+                q = q.Where(x => x.Nombre.ToLower().Contains(term) || x.SKU.ToLower().Contains(term));
             }
 
             var total = await q.CountAsync();

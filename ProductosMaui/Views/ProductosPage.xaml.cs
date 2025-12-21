@@ -46,7 +46,8 @@ public partial class ProductosPage : ContentPage
 
         _cargando = true;
 
-        var (items, total) = await _service.ObtenerProductos(_query, incluirInactivos: false, skip: _skip, take: Take);
+        bool inactivos = swInactivos.IsToggled;
+        var (items, total) = await _service.ObtenerProductos(_query, inactivos, skip: _skip, take: Take);
 
         _total = total;
         productos.AddRange(items);
@@ -73,16 +74,14 @@ public partial class ProductosPage : ContentPage
 
     private async void CrearNuevo(object sender, EventArgs e)
     {
-        await DisplayAlert("Pendiente", "Aquí abriremos la pantalla de alta.", "OK");
+        await Shell.Current.GoToAsync(nameof(AgregarProducto));
     }
 
     private async void EditarProducto(object sender, EventArgs e)
     {
         if (sender is Button btn && btn.BindingContext is Producto p)
         {
-            await Shell.Current.GoToAsync(
-                nameof(DetalleProductoPage),
-                new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(DetalleProductoPage), new Dictionary<string, object>
                 {
                 { "ProductoSKU", p.SKU }
                 });
@@ -97,4 +96,34 @@ public partial class ProductosPage : ContentPage
 
         DisplayAlert("Seleccionado", $"{producto.Nombre} ({producto.SKU})", "OK");
     }
+
+    private async void BorrarProducto(object sender, EventArgs e)
+    {
+        if (sender is Button btn && btn.BindingContext is Producto p)
+        {
+            bool confirm = await DisplayAlert("Borrado Lógico", $"Estas seguro que deseas borrar el producto: {p.Nombre}", "Borrar", "Cancelar");
+
+            if (!confirm)
+            {
+                return;
+            }
+
+
+            var (ok, error) = await _service.DesactivarProducto(p.Id);
+            if (!ok)
+            {
+                await DisplayAlert("Error", error ?? "No se pudo guardar.", "OK");
+                return;
+            }
+
+            await DisplayAlert("Listo", "Producto borrado.", "OK");
+            await CargarPrimeraPagina();
+        }
+    }
+
+    private async void Inactivos(object sender, ToggledEventArgs e)
+    {
+        await CargarPrimeraPagina();
+    }
+
 }

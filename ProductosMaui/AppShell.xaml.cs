@@ -8,6 +8,7 @@ namespace ProductosMaui
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(DetalleProductoPage), typeof(DetalleProductoPage));
+            Routing.RegisterRoute(nameof(AgregarProducto), typeof(AgregarProducto));
         }
     }
 }
