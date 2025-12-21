@@ -15,14 +15,17 @@
             <Entry x:Name="txtSku" IsEnabled="False" />
 
             <Label Text="Precio" />
-            <Entry x:Name="txtPrecio" Keyboard="Numeric" Placeholder="Ej. 1299.00" />
+            <Entry x:Name="txtPrecio" Keyboard="Numeric" Placeholder="Ej. 1299.00" TextChanged="SoloDecimal"/>
 
             <Label Text="Stock" />
-            <Entry x:Name="txtStock" Keyboard="Numeric" Placeholder="Ej. 20" />
+            <Entry x:Name="txtStock" Keyboard="Numeric" Placeholder="Ej. 20" TextChanged="SoloNumeros"/>
+
+            <Label Text="Fecha Alta"/>
+            <Entry x:Name="txtFechaAlta" IsEnabled="False"/>
 
             <HorizontalStackLayout Spacing="12">
                 <Label Text="Activo" VerticalOptions="Center" />
-                <Switch x:Name="swActivo" />
+                <Switch x:Name="swActivo" Toggled="desactivarProducto"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="12" HorizontalOptions="End">
