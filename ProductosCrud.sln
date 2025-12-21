@@ -1,13 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
+VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductosMaui", "ProductosMaui\ProductosMaui.csproj", "{ADE99C37-2B81-4AD3-927E-F892A2072AC3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "screenshots", "screenshots", "{FD58D89A-D90B-4776-9019-5A3BBB856DC8}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\OneDrive\Pictures\Screenshots\1-Busqueda-nombre.png = ..\..\..\OneDrive\Pictures\Screenshots\1-Busqueda-nombre.png
+		..\..\..\OneDrive\Pictures\Screenshots\2-Busqueda-SKU.png = ..\..\..\OneDrive\Pictures\Screenshots\2-Busqueda-SKU.png
+		..\..\..\OneDrive\Pictures\Screenshots\7-Editar-producto.png = ..\..\..\OneDrive\Pictures\Screenshots\7-Editar-producto.png
+		..\..\..\OneDrive\Pictures\Screenshots\4-Listado-productos(activos-inactivos).png = ..\..\..\OneDrive\Pictures\Screenshots\4-Listado-productos(activos-inactivos).png
+		..\..\..\OneDrive\Pictures\Screenshots\3-Listado-productos(solo-activos).png = ..\..\..\OneDrive\Pictures\Screenshots\3-Listado-productos(solo-activos).png
+		..\..\..\OneDrive\Pictures\Screenshots\5-Agregar-producto.png = ..\..\..\OneDrive\Pictures\Screenshots\5-Agregar-producto.png
+		..\..\..\OneDrive\Pictures\Screenshots\6-Validacion-campos-agregar-producto.png = ..\..\..\OneDrive\Pictures\Screenshots\6-Validacion-campos-agregar-producto.png
 	EndProjectSection
 EndProject
 Global
@@ -25,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FD58D89A-D90B-4776-9019-5A3BBB856DC8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D8D6D8C-D4AF-4924-A1CA-D5A256E5AE5F}
