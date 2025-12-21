@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ProductosMaui.Views.DetalleProductoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Detalle de producto">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <Label Text="Nombre" />
+            <Entry x:Name="txtNombre" Placeholder="Ej. Mouse Óptico" />
+
+            <Label Text="SKU (no editable)" />
+            <Entry x:Name="txtSku" IsEnabled="False" />
+
+            <Label Text="Precio" />
+            <Entry x:Name="txtPrecio" Keyboard="Numeric" Placeholder="Ej. 1299.00" TextChanged="SoloDecimal"/>
+
+            <Label Text="Stock" />
+            <Entry x:Name="txtStock" Keyboard="Numeric" Placeholder="Ej. 20" TextChanged="SoloNumeros"/>
+
+            <Label Text="Fecha Alta"/>
+            <Entry x:Name="txtFechaAlta" IsEnabled="False"/>
+
+            <HorizontalStackLayout Spacing="12">
+                <Label Text="Activo" VerticalOptions="Center" />
+                <Switch x:Name="swActivo" Toggled="desactivarProducto"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="End">
+                <Button Text="Cancelar" Clicked="Cancelar" />
+                <Button Text="Guardar" Clicked="Guardar" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

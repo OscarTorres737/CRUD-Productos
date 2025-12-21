@@ -5,7 +5,6 @@ namespace ProductosMaui.Models
     public class Producto
     {
         public int Id { get; set; }
-
         [Required, MaxLength(100)]
         public string Nombre { get; set; } = string.Empty;
 

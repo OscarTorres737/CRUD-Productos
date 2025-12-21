@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using ProductosMaui.Data;
 using ProductosMaui.Services;
+using ProductosMaui.Views;
+using System.Globalization;
 
 namespace ProductosMaui
 {
@@ -21,17 +23,24 @@ namespace ProductosMaui
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            //agregamos formato de pesos mxn 
+            var cultura = new CultureInfo("es-MX");
+            CultureInfo.DefaultThreadCurrentCulture = cultura;
+            CultureInfo.DefaultThreadCurrentUICulture = cultura;
+
             //ruta y nombre de la bd
             var dbpath = Path.Combine(FileSystem.AppDataDirectory, "productos.db");
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite($"Data source={dbpath}"));
 
             builder.Services.AddTransient<ProductoService>();
-            builder.Services.AddTransient<Views.ProductosPage>();
+            builder.Services.AddTransient<ProductosPage>();
+            builder.Services.AddTransient<DetalleProductoPage>();
+            builder.Services.AddTransient<AgregarProducto>();
 
             var app = builder.Build();
             
-
             DbInitializer.CrearDatos(app.Services);
 
             return app;

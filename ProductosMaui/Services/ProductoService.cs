@@ -24,8 +24,9 @@ namespace ProductosMaui.Services
                 
             if (!string.IsNullOrWhiteSpace(query))
             {
-                query = query.Trim();
-                q = q.Where(x => x.Nombre.Contains(query) || x.SKU.Contains(query));
+                var term = query.Trim().ToLower();
+
+                q = q.Where(x => x.Nombre.ToLower().Contains(term) || x.SKU.ToLower().Contains(term));
             }
 
             var total = await q.CountAsync();
@@ -38,9 +39,9 @@ namespace ProductosMaui.Services
             return (items, total);
         }
 
-        public Task<Producto?> ObtenerPorId(int id)
+        public Task<Producto?> ObtenerPorSKU(string SKU)
         {
-            return _db.Productos.FirstOrDefaultAsync(x => x.Id == id);
+            return _db.Productos.FirstOrDefaultAsync(x => x.SKU == SKU);
         }
 
         public async Task<(bool Ok, string? Error)> CrearProducto(Producto producto)
@@ -83,7 +84,6 @@ namespace ProductosMaui.Services
             }
 
             actual.Nombre = producto.Nombre.Trim();
-            actual.SKU = producto.SKU.Trim();
             actual.Precio = producto.Precio;
             actual.Stock = producto.Stock;
             actual.Activo = producto.Activo;
@@ -95,7 +95,7 @@ namespace ProductosMaui.Services
             }
             catch (DbUpdateException)
             {
-                return (false, "El SKU ya existe.");
+                return (false, "Error al guardar cambios.");
             }
         }
 
@@ -112,7 +112,7 @@ namespace ProductosMaui.Services
             return (true, null);
         }
 
-        private async Task<string?> ValidarProducto(int id, Producto producto)
+        public async Task<string?> ValidarProducto(int id, Producto producto)
         {
             if (string.IsNullOrWhiteSpace(producto.Nombre))
             {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProductosMaui.Views.AgregarProducto"
+             Title="Agregar nuevo producto">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Start">
+
+                <VerticalStackLayout Spacing="16"
+                         FlexLayout.Grow="1"
+                         Margin="0,0,12,0">
+                    <Label Text="SKU"/>
+                    <Entry x:Name="txtSKU" Placeholder="Ej. MO-100" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="16"
+                         FlexLayout.Grow="1"
+                         Margin="0">
+                    <Label Text="Nombre" />
+                    <Entry x:Name="txtNombre" Placeholder="Ej. Mouse Óptico" />
+                </VerticalStackLayout>
+
+            </FlexLayout>
+
+
+            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Start">
+
+                <VerticalStackLayout Spacing="16"
+                         FlexLayout.Grow="1"
+                         Margin="0,0,12,0">
+                    <Label Text="Precio"/>
+                    <Entry x:Name="txtPrecio" Keyboard="Numeric" Placeholder="Ej. 1299.00" TextChanged="SoloDecimal"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="16"
+                         FlexLayout.Grow="1"
+                         Margin="0,0,12,0">
+                    <Label Text="Stock" />
+                    <Entry x:Name="txtStock" Keyboard="Numeric" Placeholder="Ej. 20" TextChanged="SoloNumeros"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="16"
+                         FlexLayout.Grow="1"
+                         Margin="0">
+                    <Label Text="Fecha Alta" />
+                    <Entry x:Name="txtFechaAlta" IsEnabled="False" />
+                </VerticalStackLayout>
+            </FlexLayout>
+
+            <VerticalStackLayout>
+                <Label FontSize="Micro"  Text="*Todos los productos nuevos se agregan activos"/>
+            </VerticalStackLayout>
+            
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="End">
+                <Button Text="Cancelar" Clicked="Cancelar" />
+                <Button Text="Agregar Producto" Clicked="Agregar" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
